@@ -1,6 +1,6 @@
 # mytest
 
-> A Vue.js project
+> 项目的前端
 
 ## Build Setup
 
