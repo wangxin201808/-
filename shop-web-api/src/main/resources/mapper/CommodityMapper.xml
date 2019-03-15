@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.conner.shop.web.api.dao.CommodityDao">
+    <sql id="CommodityColumns">
+          a.id,
+          a.name,
+          a.old_price,
+          a.price,
+          a.parameter,
+          a.feature,
+          a.sort,
+          a.style,
+          a.img1,
+          a.img2,
+          a.img3,
+          a.img4,
+          a.created
+    </sql>
+
+    <select id="getPageCommodity" resultType="Furniture" parameterType="java.util.Map">
+        SELECT
+        <include refid="CommodityColumns" />
+        FROM
+        FURNITURE AS a
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+        </where>
+        ORDER BY a.created DESC
+        LIMIT #{page}, #{length}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        SELECT   COUNT(*)  FROM  FURNITURE
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getPicById" resultType="java.lang.String">
+        SELECT `img1`
+        FROM FURNITURE
+        WHERE `id` = #{id}
+    </select>
+
+    <select id="getInfoById" resultType="FURNITURE">
+        SELECT
+        <include refid="CommodityColumns"/>
+        FROM FURNITURE AS a
+        WHERE `id` = #{id}
+    </select>
+
+    <select id="search" resultType="FURNITURE">
+        SELECT
+        <include refid="CommodityColumns"/>
+        FROM FURNITURE AS a
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="feature != null and feature != ''">
+                AND feature = #{feature}
+            </if>
+            <if test="sort != null and sort != ''">
+                AND sort LIKE concat('%', #{sort}, '%')
+            </if>
+            <if test="style != null and style != ''">
+                AND style LIKE concat('%', #{style}, '%')
+            </if>
+            <if test="lowPrice != null and lowPrice != ''">
+                AND price &gt;= #{lowPrice}
+            </if>
+            <if test="highPrice != null and highPrice != ''">
+                AND price &lt;= #{highPrice}
+            </if>
+        </where>
+    </select>
+
+    <insert id="save">
+        INSERT INTO `shop`.`furniture` (
+          `id`,
+          `name`,
+          `old_price`,
+          `price`,
+          `parameter`,
+          `feature`,
+          `sort`,
+          `style`,
+          `img1`,
+          `img2`,
+          `img3`,
+          `img4`,
+          `created`
+        )
+        VALUES
+          (
+            #{id},
+            #{name},
+            #{oldPrice},
+            #{price},
+            #{parameter},
+            #{feature},
+            #{sort},
+            #{style},
+            #{img1},
+            #{img2},
+            #{img3},
+            #{img4},
+            #{created}
+          ) ;
+    </insert>
+
+    <delete id="removeById">
+        DELETE
+        FROM
+          furniture
+        WHERE `id` = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE
+          furniture
+        SET
+          `name` = #{name},
+          `old_price` = #{oldPrice},
+          `price` = #{price},
+          `parameter` = #{parameter},
+          `feature` = #{feature},
+          `sort` = #{sort},
+          `style` = #{style},
+          `img1` = #{img1},
+          `img2` = #{img2},
+          `img3` = #{img3},
+          `img4` = #{img4}
+        WHERE
+          `id` = #{id}
+    </update>
+</mapper>

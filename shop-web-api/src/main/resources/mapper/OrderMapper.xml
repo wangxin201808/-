@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.conner.shop.web.api.dao.OrderDao">
+    <sql id="OrderColumns">
+          a.order_id,
+          a.user_id,
+          a.shipping_name,
+          a.shipping_code,
+          a.item_id,
+          a.num,
+          a.title,
+          a.price,
+          a.total_fee,
+          a.pic_path,
+          a.receiver_name,
+          a.receiver_mobile,
+          a.receiver_state,
+          a.receiver_city,
+          a.receiver_district,
+          a.receiver_address,
+          a.receiver_zip,
+          a.car_create,
+          a.payment,
+          a.status,
+          a.create_time,
+          a.update_time,
+          a.payment_time,
+          a.consign_time,
+          a.end_time
+    </sql>
+
+    <select id="getPageOrder" resultType="Order" parameterType="java.util.Map">
+        SELECT
+        <include refid="OrderColumns" />
+        FROM
+        `shop`.`order` AS a
+        WHERE
+            a.status > 1
+            <if test="receiverName != null and receiverName != ''">
+                AND receiver_name LIKE concat('%', #{receiverName}, '%')
+            </if>
+            <if test="receiverMobile != null and receiverMobile != ''">
+                AND receiver_mobile LIKE concat('%', #{receiverMobile}, '%')
+            </if>
+            <if test="shippingCode != null and shippingCode != ''">
+                AND shipping_code LIKE concat('%', #{shippingCode}, '%')
+            </if>
+            <if test="shippingCode != null and shippingCode != ''">
+                AND user_id = #{userId}
+            </if>
+        ORDER BY a.create_time DESC
+        LIMIT #{page}, #{length}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT   COUNT(*)  FROM  `shop`.`order`
+        <where>
+            <if test="receiverName != null and receiverName != ''">
+                AND receiver_name LIKE concat('%', #{receiverName}, '%')
+            </if>
+            <if test="receiverMobile != null and receiverMobile != ''">
+                AND receiver_mobile LIKE concat('%', #{receiverMobile}, '%')
+            </if>
+            <if test="shippingCode != null and shippingCode != ''">
+                AND shipping_code LIKE concat('%', #{shippingCode}, '%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="save">
+        INSERT INTO `shop`.`order` (
+          `order_id`,
+          `user_id`,
+          `shipping_name`,
+          `shipping_code`,
+          `item_id`,
+          `num`,
+          `title`,
+          `price`,
+          `total_fee`,
+          `pic_path`,
+          `receiver_name`,
+          `receiver_mobile`,
+          `receiver_state`,
+          `receiver_city`,
+          `receiver_district`,
+          `receiver_address`,
+          `receiver_zip`,
+          `car_create`,
+          `payment`,
+          `status`,
+          `create_time`,
+          `update_time`,
+          `payment_time`,
+          `consign_time`,
+          `end_time`
+        )
+        VALUES
+          (
+            #{orderId},
+            #{userId},
+            #{shippingName},
+            #{shippingCode},
+            #{itemId},
+            #{num},
+            #{title},
+            #{price},
+            #{totalFee},
+            #{picPath},
+            #{receiverName},
+            #{receiverMobile},
+            #{receiverState},
+            #{receiverCity},
+            #{receiverDistrict},
+            #{receiverAddress},
+            #{receiverZip},
+            #{carCreated},
+            #{payment},
+            #{status},
+            #{createTime},
+            #{updateTime},
+            #{paymentTime},
+            #{consignTime},
+            #{endTime}
+          ) ;
+    </insert>
+
+    <delete id="removeById">
+        DELETE
+        FROM
+          `shop`.`order`
+        WHERE `order_id` = #{orderId}
+    </delete>
+
+    <update id="update">
+        UPDATE
+          `shop`.`order`
+        SET
+          shipping_name = #{shippingName},
+          shipping_code = #{shippingCode},
+          num = #{num},
+          title = #{title},
+          receiver_name = #{receiverName},
+          receiver_mobile = #{receiverMobile},
+          receiver_address = #{receiverAddress},
+          status = #{status}
+        WHERE
+          `order_id` = #{orderId}
+    </update>
+</mapper>

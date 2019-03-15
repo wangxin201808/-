@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.conner.shop.web.api.dao.RecommendDao">
+    <sql id="columns">
+          a.carousel_id,
+          a.created
+    </sql>
+
+    <insert id="save">
+        INSERT INTO `shop`.`recommend` (`carousel_id`, `created`)
+        VALUES
+        (#{carouselId}, #{created}) ;
+    </insert>
+
+    <select id="getById" resultType="Recommend">
+     SELECT
+      <include refid="columns" />
+     FROM
+          `shop`.`recommend` AS a
+      WHERE
+        a.carousel_id = #{id};
+    </select>
+
+    <update id="update">
+        UPDATE `shop`.`recommend` AS a
+        SET
+	      a.`created` = #{created}
+        WHERE
+          a.carousel_id = #{carouselId}
+    </update>
+
+    <select id="getPage" resultType="Recommend">
+        SELECT a.carousel_id
+        FROM  `shop`.`recommend` AS a
+        ORDER BY a.created DESC
+        LIMIT 0, 6
+    </select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.conner.shop.web.api.dao.OrderCarDao">
+    <sql id="columns">
+          a.id,
+          a.uId,
+          a.num,
+          a.created
+    </sql>
+
+    <insert id="save">
+        INSERT INTO `shop`.`order_car` (`id`, `uId`, `num`, `created`)
+        VALUES
+          (#{id}, #{uId}, #{num}, #{created}) ;
+    </insert>
+
+    <select id="getInfoByUID" resultType="OrderCar">
+        SELECT
+        <include refid="columns" />
+        FROM
+        `shop`.`order_car` AS a
+        WHERE
+        a.uId = #{id}
+        ORDER BY a.created DESC
+    </select>
+
+    <update id="update">
+        UPDATE  `shop`.`order_car` AS a
+        SET
+          a.`num` = #{num}
+        WHERE
+          a.id = #{id} AND a.uId = #{uId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `shop`.`order_car`
+        WHERE id = #{id} AND uId = #{uId}
+    </delete>
+
+    <select id="getOneInfo" resultType="OrderCar" parameterType="java.util.Map">
+        SELECT
+        <include refid="columns" />
+        FROM
+        `shop`.`order_car` AS a
+        WHERE
+        a.id = #{id} AND a.uId = #{uId}
+    </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.conner.shop.web.api.dao.HotDao">
+    <sql id="columns">
+          a.hot_id,
+          a.created
+    </sql>
+
+    <insert id="save">
+        INSERT INTO `shop`.`hot` (`hot_id`, `created`)
+        VALUES
+        (#{hotId}, #{created}) ;
+    </insert>
+
+    <select id="getById" resultType="Hot">
+        SELECT
+        <include refid="columns" />
+        FROM
+        `shop`.`hot` AS a
+        WHERE
+        a.hot_id = #{id};
+    </select>
+
+    <update id="update">
+        UPDATE `shop`.`hot` AS a
+        SET
+	      a.`created` = #{created}
+        WHERE
+          a.hot_id = #{hotId}
+    </update>
+
+    <select id="getHotPage" resultType="Hot">
+        SELECT
+        <include refid="columns" />
+        FROM
+        `shop`.`hot` AS a
+        ORDER BY a.created DESC
+        LIMIT 0, 6
+    </select>
+</mapper>

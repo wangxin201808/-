@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.conner.shop.web.api.dao.UserDao">
+    <sql id="UserColumns">
+          a.id,
+          a.role,
+          a.name,
+          a.password,
+          a.phone,
+          a.email,
+          a.birth,
+          a.sex,
+          a.hobby,
+          a.address,
+          a.created
+    </sql>
+
+    <select id="getUserById" resultType="User">
+        SELECT
+        <include refid="UserColumns" />
+        FROM
+        USER AS a
+        WHERE
+        a.id = #{id}
+    </select>
+
+    <select id="getUserByPhone" resultType="User">
+        SELECT
+        <include refid="UserColumns" />
+        FROM
+        USER AS a
+        WHERE
+        a.phone = #{phone}
+    </select>
+
+    <select id="getUserByName" resultType="User">
+        SELECT
+        <include refid="UserColumns" />
+        FROM
+        USER AS a
+        WHERE
+        a.name = #{name}
+    </select>
+
+    <select id="getPageUsers" resultType="User" parameterType="java.util.Map">
+        SELECT
+        <include refid="UserColumns" />
+        FROM
+        USER AS a
+        WHERE
+        a.role = 1
+        <if test="name != null and name != ''">
+            AND name LIKE concat('%', #{name}, '%')
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone LIKE concat('%', #{phone}, '%')
+        </if>
+        ORDER BY a.created DESC
+        LIMIT #{page}, #{length}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT   COUNT(*)  FROM  USER
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="phone != null and phone != ''">
+                AND phone LIKE concat('%', #{phone}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <insert id="save">
+        INSERT INTO `shop`.`user` (
+          `id`,
+          `name`,
+          `password`,
+          `phone`,
+          `email`,
+          `birth`,
+          `sex`,
+          `address`,
+          `created`
+        )
+        VALUES
+          (
+            #{id},
+            #{name},
+            #{password},
+            #{phone},
+            #{email},
+            STR_TO_DATE(#{birth},"%Y-%m-%d"),
+            #{sex},
+            #{address},
+        <set>
+        <if test="created != null">
+            #{created}
+        </if>
+        </set>
+
+          ) ;
+    </insert>
+
+    <delete id="removeById">
+        DELETE
+        FROM
+          USER
+        WHERE `id` = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE
+          USER
+        SET
+          `name` = #{name},
+          `password` = #{password},
+          `phone` = #{phone},
+          `email` = #{email},
+          `birth` = #{birth},
+          `sex` = #{sex},
+          `hobby` = #{hobby},
+          `address` = #{address}
+        WHERE
+          `id` = #{id}
+    </update>
+</mapper>
