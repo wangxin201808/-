@@ -141,7 +141,7 @@
         let params = {
           page: this.current - 1,
           length: this.pageSize,
-          userId: this.$route.params.id
+          userId: this.$store.getters.getUser.id
         }
         order(params).then( res => {
           console.log("res", res);

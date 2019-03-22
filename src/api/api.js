@@ -18,6 +18,8 @@ export const getUserInfo = params =>{ return axios.post(`${base}/user/getinfo`, 
 
 export const setUserInfo = params =>{ return axios.post(`${base}/user/add`, qs.stringify(params)); }
 
+export const resetPassword = params =>{ return axios.post(`${base}/resetpwd`, qs.stringify(params)); }
+
 
 /* furnitures api */
 export const getRecommend = params => { return axios.get(`${base}/commodity/getrecommend`);}

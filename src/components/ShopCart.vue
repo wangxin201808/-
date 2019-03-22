@@ -213,11 +213,11 @@
            'itemId': this.arr.toString(),
            'userId': this.$store.getters.getUser.id,
            'WIDout_trade_no': Utils.getTime(),
-            // 'WIDtotal_amount': this.sum,
-            'WIDtotal_amount': '0.01',
+            'WIDtotal_amount': this.sum,
+            // 'WIDtotal_amount': '0.01',
            'WIDsubject': '共计1种商品',
-           // 'WIDbody': this.names.toString()
-           'WIDbody': '0.01'
+           'WIDbody': this.names.toString()
+           // 'WIDbody': '0.01'
          }
          pay(params).then(res => {
            console.log("********************")

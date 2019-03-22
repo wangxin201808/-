@@ -68,7 +68,7 @@
         </span>
         <Row v-else>
           <Col>
-            <span class="span">对不起，您需求我们正在备货中，请看看其他商品吧</span>
+            <span class="span">努力备货中。。。</span>
           </Col>
         </Row>
       </Col>

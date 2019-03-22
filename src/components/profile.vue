@@ -7,9 +7,6 @@
         <FormItem label="手机号" prop="phone">
           <Input v-model="formValidate.phone" placeholder="请输入您的电子邮件"></Input>
         </FormItem>
-        <FormItem label="密码" prop="secret">
-          <Input v-model="formValidate.secret" placeholder="请输入您的密码"></Input>
-        </FormItem>
         <FormItem label="邮箱" prop="email">
           <Input v-model="formValidate.email" placeholder="请输入您的电子邮件"></Input>
         </FormItem>
@@ -69,7 +66,6 @@
           formValidate: {
             name: '',
             phone: '',
-            secret: '',
             email: '',
             sex: -1,
             hobby: [],
@@ -83,9 +79,6 @@
             phone: [
               {required: true, message: '手机号不能为空', trigger: 'blur' },
               { type: 'regexp', pattern: "/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/", message: '邮箱不符合规范', trigger: 'blur' }
-            ],
-            secret: [
-              {required: true, type: 'string', message: '密码不能为空', trigger: 'blur' }
             ],
             email: [
               { type: 'email', message: '邮箱不符合规范', trigger: 'blur' }

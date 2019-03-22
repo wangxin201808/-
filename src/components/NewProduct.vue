@@ -4,7 +4,7 @@
     <Row :gutter="24" >
       <Col span="8" v-for="(item, index) in 3" :key="index">
         <div @click="showDetail(index)">
-          <img :src="values[index].img" alt="" width="417" height="388" v-if="values[index]"/>
+          <img :src="values[index].img" alt="" width="417" height="300" v-if="values[index]"/>
           <div v-if="values[index]">{{values[index].name}}</div>
           <div v-if="values[index]"><span class="first">￥{{values[index].price}}</span><span class="second">￥ {{values[index].oldPrice}}</span></div>
         </div>
@@ -14,7 +14,7 @@
     <Row :gutter="24" >
       <Col span="8" v-for="(item, index) in 3" :key="index">
         <div @click="showDetail(index+3)">
-          <img :src="values[index+3].img" alt="" width="417" height="388" v-if="values[index+3]" />
+          <img :src="values[index+3].img" alt="" width="417" height="300" v-if="values[index+3]" />
           <div v-if="values[index+3]">{{values[index+3].name}}</div>
           <div v-if="values[index+3]"><span class="first">￥{{values[index+3].price}}</span><span class="second">￥ {{values[index+3].oldPrice}}</span></div>
         </div>
