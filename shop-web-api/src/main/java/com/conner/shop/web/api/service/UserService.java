@@ -61,4 +61,11 @@ public interface UserService {
      * @return
      */
     BaseResult getUser(String id);
+
+    /**
+     * 根据用户 id 重置密码
+     * @param phone
+     * @return
+     */
+    BaseResult resetPassword(String phone,String password);
 }

@@ -173,4 +173,18 @@ public class UserServiceImpl implements UserService {
             return BaseResult.fail("获取用户信息失败");
         }
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public BaseResult resetPassword(String phone, String password) {
+        User user = userDao.getUserByPhone(phone);
+        user.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+        try {
+            userDao.update(user);
+            return BaseResult.success("密码更新成功");
+        }catch(Exception e) {
+            return BaseResult.fail("密码更新失败");
+        }
+
+    }
 }

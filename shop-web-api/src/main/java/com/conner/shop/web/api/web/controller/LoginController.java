@@ -42,6 +42,11 @@ public class LoginController {
         return BaseResult.fail("用户名或密码错误");
     }
 
+    /**
+     * 用户退出
+     * @param httpServletRequest
+     * @return
+     */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public BaseResult logout(HttpServletRequest httpServletRequest) {
         httpServletRequest.getSession().invalidate();
@@ -113,6 +118,20 @@ public class LoginController {
     public BaseResult register(String phone, String secret) {
         return userService.register(phone, secret);
 
+    }
+
+    /**
+     * 根据用户id 获取用户信息，并修改密码
+     * @param phone
+     * @param password
+     * @return
+     */
+    @RequestMapping(value = "resetpwd", method = RequestMethod.POST)
+    public BaseResult resetPassword(String phone, String password, String validator) {
+        if (phoneAndValidator.get(phone).equals(validator)){
+            return userService.resetPassword(phone, password);
+        }
+        return BaseResult.fail("验证码错误");
     }
 
 }

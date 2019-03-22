@@ -45,8 +45,11 @@
             <if test="shippingCode != null and shippingCode != ''">
                 AND shipping_code LIKE concat('%', #{shippingCode}, '%')
             </if>
-            <if test="shippingCode != null and shippingCode != ''">
+            <if test="userId != null and userId != ''">
                 AND user_id = #{userId}
+            </if>
+            <if test="shippingCode == null and receiverMobile == null and receiverName == null and userId == null">
+                AND 1!=1
             </if>
         ORDER BY a.create_time DESC
         LIMIT #{page}, #{length}
@@ -63,6 +66,9 @@
             </if>
             <if test="shippingCode != null and shippingCode != ''">
                 AND shipping_code LIKE concat('%', #{shippingCode}, '%')
+            </if>
+            <if test="shippingCode == null and receiverMobile == null and receiverName == null">
+                AND 1!=1
             </if>
         </where>
     </select>

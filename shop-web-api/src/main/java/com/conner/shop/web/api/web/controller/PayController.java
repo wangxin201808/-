@@ -118,7 +118,7 @@ public class PayController {
             Integer i = orderService.save(total_amount, out_trade_no, userId, itemId);
 
             if (i == 1) {
-                response.sendRedirect("http://localhost:8081/#/order/"+ userId);
+                response.sendRedirect("http://localhost:8081/#/order/");
             }
 
             return "trade_no:"+trade_no+"<br/>out_trade_no:"+out_trade_no+"<br/>total_amount:"+total_amount;

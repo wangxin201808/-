@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface OrderService {
     /**
-     * 获取用户列表
+     * 获取订单列表
      * @param page
      * @param length
      * @param shippingCode

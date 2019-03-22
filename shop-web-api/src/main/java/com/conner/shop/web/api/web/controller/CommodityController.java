@@ -73,6 +73,7 @@ public class CommodityController {
     /**
      * 设置推荐商品
      * @param ids
+     * @param type 热销商品，或是推荐商品
      * @return
      */
     @RequestMapping(value = "setrecommend", method = RequestMethod.POST)

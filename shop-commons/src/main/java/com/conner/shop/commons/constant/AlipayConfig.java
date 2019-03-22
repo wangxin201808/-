@@ -11,10 +11,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyUNhIt/ppjL88UBwoMWMQLLC87zWcfbnxoTwI7Ev/jQr5y3/Sl5cRIYiNMa2gdkHBhH9Ctx1o9jLYW+1qc/JCqyHvOFqma6pTD04O/FfgujrW+z5PSfuUMAPHc0WAZJQhDzPSW4cayURHZCDfaOOoCwtFqQngkJt8+JXD4foMqSAmzlwWKcwNuTZ6T6/4HrHyksCoR1NVFA7Pfkl2/7n2T24UFNKJiUOfO2SeRGY/DKZaW19NvlztDNXy9HyYioLqjEpJDoJiiNrZSlqnHX8YqlgnA4sfgtbsd3mWS2UlXkbyg+CV8JM4GZvElaRzurqppm0iBgtqDO9YzPvJjVKawIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "http://c7eexn.natappfree.cc/shop_web_api_war_exploded/notifyUrl";
+    public static String notify_url = "http://siwv3h.natappfree.cc/shop_web_api_war_exploded/notifyUrl";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String return_url = "http://c7eexn.natappfree.cc/shop_web_api_war_exploded/returnUrl";
+    public static String return_url = "http://siwv3h.natappfree.cc/shop_web_api_war_exploded/returnUrl";
 
     // 签名方式
     public static String sign_type = "RSA2";

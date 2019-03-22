@@ -70,4 +70,6 @@ public class UserController {
     public BaseResult getUserInfoByID (String id) {
         return userService.getUser(id);
     }
+
+
 }

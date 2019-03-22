@@ -93,11 +93,7 @@
             STR_TO_DATE(#{birth},"%Y-%m-%d"),
             #{sex},
             #{address},
-        <set>
-        <if test="created != null">
             #{created}
-        </if>
-        </set>
 
           ) ;
     </insert>
