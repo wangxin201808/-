@@ -52,4 +52,8 @@ export const getKuaidi = params => { return axios.get(`${base}/order/address`, {
     'Content-Type': 'application/x-www-from-urlencoded; charset=UTF-8'
   },}) }
 
+/* 评论 api */
+export const getPinglun = params => {return axios.get(`${base}/pinglun/getInfo`, {params: params})}
+
+export const savePinglun = params => {return axios.post(`${base}/pinglun/save`, qs.stringify(params))}
 
