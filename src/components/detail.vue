@@ -59,17 +59,23 @@
           </Row>
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <ping-lun :pId="pId"></ping-lun>
+        </Col>
+      </Row>
     </div>
 </template>
 
 <script>
   import Plus from "./plus"
+  import PingLun from "./PingLun"
   import {getDetail, joinCar, getUserInfo} from "../api/api";
   // 图片放大器
   import PicZoom from 'vue-piczoom'
   export default {
-        name: "detail",
-      components:{PicZoom, Plus},
+    name: "detail",
+      components:{PicZoom, Plus, PingLun},
       data() {
         return {
           num: 1,
@@ -77,7 +83,8 @@
             num: 1
           },
           showPic: '',
-          order: 'img1'
+          order: 'img1',
+          pId: '',
         }
       },
       methods: {
@@ -110,13 +117,13 @@
         // 加入购物车
         addCar() {
           // 没有登录
-          if (this.$store.getters.getUser.id == null) {
+          if (this.$store.getters.getUser.id == "") {
             this.$Message.error({
               content: "请先登录",
               duration: 5
             });
             this.$router.push({name: 'Login'});
-            // return;
+            return;
           }
           // 登录了没有填写个人信息
           let infoParams = {'id': this.$store.getters.getUser.id}
@@ -151,8 +158,8 @@
       },
       created() {
         console.log(this.$route.params.id);
+        this.pId = this.$route.params.id;
         this.showDetail(this.$route.params.id);
-
       }
     }
 </script>
@@ -220,4 +227,5 @@
     border: 5px #ff9900 solid;
     border-radius: 10px;
   }
+
 </style>
