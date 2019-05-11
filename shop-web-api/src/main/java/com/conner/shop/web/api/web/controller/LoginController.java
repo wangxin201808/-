@@ -2,6 +2,7 @@ package com.conner.shop.web.api.web.controller;
 
 import com.conner.shop.commons.constant.ConstantUtils;
 import com.conner.shop.commons.dto.BaseResult;
+import com.conner.shop.commons.plugin.message.src.SDKTestSendTemplateSMS;
 import com.conner.shop.domain.User;
 import com.conner.shop.web.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,7 @@ public class LoginController {
             phoneAndValidator.put(phone, substring);
 
             // 发送验证码
-//        SDKTestSendTemplateSMS.sendSMS(phone, substring);
+        SDKTestSendTemplateSMS.sendSMS(phone, substring);
             return BaseResult.success();
         }
 
